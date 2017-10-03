@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +18,8 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
+import static com.example.tejaspatel.log.R.id.user;
+
 /**
  * Created by Tejas Patel on 25-Jul-17.
  */
@@ -24,6 +27,8 @@ import java.util.HashMap;
 public class Profile extends Fragment {
 
     TextView textViewCreated,textViewUsername,textViewJoined,textViewGender;
+    Button editprofile;
+
     private  String username;
     private int userid;
     @Override
@@ -31,8 +36,22 @@ public class Profile extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.profile, container, false);
 
-        User user = SharedPrefManager.getInstance(getContext()).getUser();
+        editprofile= (Button) rootView.findViewById(R.id.editprofile) ;
+        final User user = SharedPrefManager.getInstance(getContext()).getUser();
 
+        editprofile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent edit=new Intent(getContext(),EditProfile.class);
+                edit.putExtra("ID",user.getId());
+                edit.putExtra("name",user.getName());
+                edit.putExtra("username",user.getUsername());
+                edit.putExtra("email",user.getEmail());
+                edit.putExtra("mobileno",user.getMobileno());
+                edit.putExtra("gender",user.getGender());
+                startActivity(edit);
+            }
+        });
 
         //setting the values to the textviews
         textViewUsername=(TextView)rootView.findViewById(R.id.username1);

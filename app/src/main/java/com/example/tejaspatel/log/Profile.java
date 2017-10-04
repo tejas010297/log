@@ -18,7 +18,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
-import static com.example.tejaspatel.log.R.id.user;
+//import static com.example.tejaspatel.log.R.id.user;
 
 /**
  * Created by Tejas Patel on 25-Jul-17.
